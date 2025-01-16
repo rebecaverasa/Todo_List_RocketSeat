@@ -18,6 +18,10 @@ export function Tasks() {
         );
     };
 
+    const deleteTask = (id: number) => {
+        setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    };
+
     return (
         <div className={styles.tasksContainer}>
             {tasks.map((task) => (
@@ -40,8 +44,10 @@ export function Tasks() {
                         />
                         <span>{task.text}</span>
                     </div>
-                    <button className={styles.deleteButton}>
-                        <FaTrashAlt />
+                    <button 
+                        	className={styles.deleteButton}
+                            onClick={() => deleteTask(task.id)}>
+                                <FaTrashAlt />
                     </button>
                 </div>
             ))}
