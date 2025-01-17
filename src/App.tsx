@@ -37,11 +37,14 @@ export default function App() {
         setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
     };
 
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter((task) => task.completed).length;
+
     return (
         <>
             <Header />
             <NewTask onAddTask={addTask} />
-            <Tracker />
+            <Tracker totalTasks={totalTasks} completedTasks={completedTasks} />
             <Tasks
                 tasks={tasks}
                 onToggleComplete={toggleTaskComplete}
