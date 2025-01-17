@@ -1,27 +1,19 @@
 import { FaTrashAlt } from 'react-icons/fa';
 import styles from './Tasks.module.css';
-import { useState } from 'react';
 
-export function Tasks() {
-    const [tasks, setTasks] = useState([
-        {id: 1, text: 'Exemplo de tarefa pendente', completed: false},
-        {id: 2, text: 'Exemplo de tarefa concluida', completed: true}
-    ]);
+interface Task {
+    id: number;
+    text: string;
+    completed: boolean;
+}
 
-    const toggleTaskComplete = (id: number) => {
-        setTasks((prevTasks) =>
-            prevTasks.map((task) =>
-                task.id === id
-                    ? { ...task, completed: !task.completed }
-                    : task
-            )
-        );
-    };
+interface TasksProps {
+    tasks: Task[];
+    onToggleComplete: (id: number) => void;
+    onDelete: (id: number) => void;
+}
 
-    const deleteTask = (id: number) => {
-        setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
-    };
-
+export function Tasks({ tasks, onToggleComplete, onDelete }: TasksProps) {
     return (
         <div className={styles.tasksContainer}>
             {tasks.map((task) => (
@@ -31,9 +23,9 @@ export function Tasks() {
                         task.completed ? styles.completed : ''
                     }`}
                 >
-                    <div 
+                    <div
                         className={styles.taskContent}
-                        onClick={() => toggleTaskComplete(task.id)}
+                        onClick={() => onToggleComplete(task.id)}
                     >
                         <div
                             className={
@@ -44,10 +36,11 @@ export function Tasks() {
                         />
                         <span>{task.text}</span>
                     </div>
-                    <button 
-                        	className={styles.deleteButton}
-                            onClick={() => deleteTask(task.id)}>
-                                <FaTrashAlt />
+                    <button
+                        className={styles.deleteButton}
+                        onClick={() => onDelete(task.id)}
+                    >
+                        <FaTrashAlt />
                     </button>
                 </div>
             ))}
