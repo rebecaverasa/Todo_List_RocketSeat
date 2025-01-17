@@ -1,14 +1,14 @@
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { Header } from './components/Header';
 import { NewTask } from './components/NewTask';
 import { Tasks } from './components/Tasks';
 import { Tracker } from './components/Tracker';
 import './global.css';
-
-interface Task {
-    id: number;
-    text: string;
-    completed: boolean;
+export interface Task {
+  id: string;
+  text: string;
+  completed: boolean;
 }
 
 export default function App() {
@@ -16,14 +16,14 @@ export default function App() {
 
     const addTask = (taskText: string) => {
         const newTask = {
-            id: tasks.length + 1,
+            id: uuidv4(),
             text: taskText,
             completed: false,
         };
         setTasks((prevTasks) => [...prevTasks, newTask]);
     };
 
-    const toggleTaskComplete = (id: number) => {
+    const toggleTaskComplete = (id: string) => {
         setTasks((prevTasks) =>
             prevTasks.map((task) =>
                 task.id === id
@@ -33,7 +33,7 @@ export default function App() {
         );
     };
 
-    const deleteTask = (id: number) => {
+    const deleteTask = (id: string) => {
         setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
     };
 

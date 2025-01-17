@@ -1,16 +1,11 @@
 import { FaTrashAlt } from 'react-icons/fa';
 import styles from './Tasks.module.css';
-
-interface Task {
-    id: number;
-    text: string;
-    completed: boolean;
-}
+import { Task } from '../App';
 
 interface TasksProps {
     tasks: Task[];
-    onToggleComplete: (id: number) => void;
-    onDelete: (id: number) => void;
+    onToggleComplete: (id: string) => void;
+    onDelete: (id: string) => void;
 }
 
 export function Tasks({ tasks, onToggleComplete, onDelete }: TasksProps) {
