@@ -66,3 +66,33 @@
 .deleteButton:hover {
     color: var(--danger);
 }
+
+.emptyState {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--gray-300);
+}
+
+.emptyIcon {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+    margin-top: 4rem;
+}
+
+.emptyMessageTop {
+    font-size: 1rem;
+    margin: 0.25rem 0;
+    font-weight: bold;
+}
+
+.emptyMessageBottom {
+    font-size: 1rem;
+    margin: 0.25rem 0;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid var(--gray-400);
+    margin-top: 0.5rem;
+}

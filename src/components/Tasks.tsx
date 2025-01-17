@@ -1,6 +1,7 @@
 import { FaTrashAlt } from 'react-icons/fa';
 import styles from './Tasks.module.css';
 import { Task } from '../App';
+import emptyTask from '../assets/empty-task.svg';
 
 interface TasksProps {
     tasks: Task[];
@@ -11,7 +12,21 @@ interface TasksProps {
 export function Tasks({ tasks, onToggleComplete, onDelete }: TasksProps) {
     return (
         <div className={styles.tasksContainer}>
-            {tasks.map((task) => (
+            {tasks.length === 0 ? (
+                <div className={styles.emptyState}>
+                    <hr className={styles.divider} />
+                    <img 
+                        src={emptyTask}
+                        alt='Sem tarefas no momento'
+                        className={styles.emptyIcon}
+                    />
+                    <p className={styles.emptyMessageTop}>Você ainda não tem tarefas cadastradas
+                    </p>
+                    <p className={styles.emptyMessageBottom}>Crie tarefas e organize seus itens a fazer
+                    </p>
+                </div>
+            ) : (
+            tasks.map((task) => (
                 <div
                     key={task.id}
                     className={`${styles.task} ${
@@ -38,7 +53,8 @@ export function Tasks({ tasks, onToggleComplete, onDelete }: TasksProps) {
                         <FaTrashAlt />
                     </button>
                 </div>
-            ))}
+            ))
+        )}
         </div>
     );
 }
